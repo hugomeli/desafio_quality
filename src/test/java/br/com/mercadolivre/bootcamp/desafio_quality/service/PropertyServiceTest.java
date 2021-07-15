@@ -1,7 +1,6 @@
 package br.com.mercadolivre.bootcamp.desafio_quality.service;
 
 import br.com.mercadolivre.bootcamp.desafio_quality.model.entities.District;
-import br.com.mercadolivre.bootcamp.desafio_quality.model.entities.DistrictsNames;
 import br.com.mercadolivre.bootcamp.desafio_quality.model.entities.Property;
 import br.com.mercadolivre.bootcamp.desafio_quality.model.entities.Room;
 import br.com.mercadolivre.bootcamp.desafio_quality.model.service.PropertyService;
@@ -45,12 +44,11 @@ public class PropertyServiceTest {
     }
 
     private List<Room> createRooms(){
-        List<Room> rooms = new ArrayList<>(Arrays.asList(
+        return new ArrayList<>(Arrays.asList(
                 new Room("Quarto", 4, 5),
                 new Room("Sala", 5, 6),
                 new Room("Cozinha", 5, 5),
                 new Room("Banheiro", 3, 2)
         ));
-        return rooms;
     }
 }
