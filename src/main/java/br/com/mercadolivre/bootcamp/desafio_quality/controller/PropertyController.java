@@ -22,9 +22,15 @@ public class PropertyController {
         this.propertyService = propertyService;
     }
 
-    @PostMapping
+    @PostMapping("/squaremeters")
     public ResponseEntity<?> calcTotalSquareMeters(@RequestBody PropertyFormDTO propertyFormDTO){
         Property property = this.propertyService.converteFormParaProperty(propertyFormDTO);
         return new ResponseEntity<>(this.propertyService.getTotalAreaProperty(property), HttpStatus.OK);
+    }
+
+    @PostMapping("/price")
+    public ResponseEntity<?> calcPropertyTotalPrice(@RequestBody PropertyFormDTO propertyFormDTO){
+        Property property = this.propertyService.converteFormParaProperty(propertyFormDTO);
+        return new ResponseEntity<>(this.propertyService.getTotalPriceProperty(property), HttpStatus.OK);
     }
 }

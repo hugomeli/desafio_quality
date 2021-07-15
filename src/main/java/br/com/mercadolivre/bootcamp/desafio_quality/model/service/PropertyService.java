@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Comparator;
 
 
@@ -38,7 +39,7 @@ public class PropertyService {
     public BigDecimal getTotalPriceProperty(Property property){
         double totalAreaProperty = getTotalAreaProperty(property);
         BigDecimal valueM2 = property.getDistrict().getValueM2();
-        return valueM2.multiply(BigDecimal.valueOf(totalAreaProperty));
+        return valueM2.multiply(BigDecimal.valueOf(totalAreaProperty)).setScale(2, RoundingMode.HALF_DOWN);
     }
 
     public Room getLargestRoom(Property property){
