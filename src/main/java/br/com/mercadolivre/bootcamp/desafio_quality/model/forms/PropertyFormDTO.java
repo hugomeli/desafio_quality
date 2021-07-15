@@ -1,6 +1,8 @@
 package br.com.mercadolivre.bootcamp.desafio_quality.model.forms;
 
 
+import org.springframework.validation.annotation.Validated;
+
 import java.util.List;
 
 
