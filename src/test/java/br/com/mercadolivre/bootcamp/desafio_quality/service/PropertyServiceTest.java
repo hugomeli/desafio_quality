@@ -23,7 +23,7 @@ public class PropertyServiceTest {
     }
 
     @Test
-    void deveRetornarAAreaDeUmComodo_LarguraVezesComprimento(){
+    void deveriaRetornarAAreaDeUmComodo_LarguraVezesComprimento(){
         Room room = new Room("Quarto", 5, 6);
         double expectedResult = 30.0;
         double result = propertyService.getTotalAreaRoom(room);
@@ -31,7 +31,7 @@ public class PropertyServiceTest {
     }
 
     @Test
-    void deveRetornarAAreaDeUmaPropriedadeComDiversosComodosComAtributosValidos(){
+    void deveriaRetornarAAreaDeUmaPropriedadeComDiversosComodosComAtributosValidos(){
         Property property = createProperty();
         double expectedResult = 81.0;
         double result = propertyService.getTotalAreaProperty(property);
@@ -39,10 +39,18 @@ public class PropertyServiceTest {
     }
 
     @Test
-    void deveRetornarOValorDeUmaPropriedadeComTodosAtributosValidos(){
+    void deveriaRetornarOValorDeUmaPropriedadeComTodosAtributosValidos(){
         Property property = createProperty();
         BigDecimal expectedResult = new BigDecimal("486.00");
         BigDecimal result = propertyService.getTotalPriceProperty(property);
+        Assertions.assertEquals(expectedResult, result);
+    }
+
+    @Test
+    void deveriaRetornarOMaiorComodoQueUmaPropriedadePossuiComTodosAtributosValidos(){
+        Property property = createProperty();
+        Room expectedResult = new Room("Sala", 5, 6);
+        Room result = propertyService.getLargestRoom(property);
         Assertions.assertEquals(expectedResult, result);
     }
 

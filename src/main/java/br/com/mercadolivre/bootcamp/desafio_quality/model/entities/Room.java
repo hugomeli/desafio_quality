@@ -38,4 +38,15 @@ public class Room {
     public void setLength(double length) {
         this.length = length;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj.getClass() != this.getClass()){
+            return false;
+        }
+        Room anotherRoom = (Room) obj;
+        return (this.getName().equals(anotherRoom.getName())
+                && this.getLength() == anotherRoom.getLength()
+                && this.getWidth() == anotherRoom.getWidth());
+    }
 }
