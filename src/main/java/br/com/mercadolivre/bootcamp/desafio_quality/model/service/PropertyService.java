@@ -1,13 +1,14 @@
 package br.com.mercadolivre.bootcamp.desafio_quality.model.service;
 
+import br.com.mercadolivre.bootcamp.desafio_quality.model.entities.District;
 import br.com.mercadolivre.bootcamp.desafio_quality.model.entities.Property;
 import br.com.mercadolivre.bootcamp.desafio_quality.model.entities.Room;
+import br.com.mercadolivre.bootcamp.desafio_quality.model.forms.PropertyFormDTO;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Service

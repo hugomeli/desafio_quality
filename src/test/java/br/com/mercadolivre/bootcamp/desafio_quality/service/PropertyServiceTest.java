@@ -3,6 +3,8 @@ package br.com.mercadolivre.bootcamp.desafio_quality.service;
 import br.com.mercadolivre.bootcamp.desafio_quality.model.entities.District;
 import br.com.mercadolivre.bootcamp.desafio_quality.model.entities.Property;
 import br.com.mercadolivre.bootcamp.desafio_quality.model.entities.Room;
+import br.com.mercadolivre.bootcamp.desafio_quality.model.forms.PropertyFormDTO;
+import br.com.mercadolivre.bootcamp.desafio_quality.model.repository.DistrictRepository;
 import br.com.mercadolivre.bootcamp.desafio_quality.model.service.PropertyService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,10 +18,12 @@ import java.util.List;
 public class PropertyServiceTest {
 
     private PropertyService propertyService;
+    private DistrictRepository districtRepository;
 
     @BeforeEach
     public void init(){
         this.propertyService = new PropertyService();
+        this.districtRepository = new DistrictRepository();
     }
 
     @Test
@@ -52,6 +56,12 @@ public class PropertyServiceTest {
         Room expectedResult = new Room("Sala", 5, 6);
         Room result = propertyService.getLargestRoom(property);
         Assertions.assertEquals(expectedResult, result);
+    }
+
+    @Test
+    void deveriaIndicarCasoOBairroIndicadoExistaNoRepositorioNomesDeBairros(){
+        District result = this.districtRepository.findByName("Tatuapé");
+        Assertions.assertEquals("Tatuapé", result.getName());
     }
 
     private List<Room> createRooms(){
