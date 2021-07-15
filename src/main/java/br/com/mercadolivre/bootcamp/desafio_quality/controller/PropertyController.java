@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.math.BigDecimal;
 
 @RestController
@@ -27,13 +28,13 @@ public class PropertyController {
     }
 
     @PostMapping("/squaremeters")
-    public ResponseEntity<?> calcTotalSquareMeters(@RequestBody PropertyFormDTO propertyFormDTO){
+    public ResponseEntity<?> calcTotalSquareMeters(@Valid @RequestBody PropertyFormDTO propertyFormDTO){
         Property property = this.propertyService.convertFormToProperty(propertyFormDTO);
         return new ResponseEntity<>(this.propertyService.getTotalAreaProperty(property), HttpStatus.OK);
     }
 
     @PostMapping("/price")
-    public ResponseEntity<?> calcPropertyTotalPrice(@RequestBody PropertyFormDTO propertyFormDTO){
+    public ResponseEntity<?> calcPropertyTotalPrice(@Valid @RequestBody PropertyFormDTO propertyFormDTO){
         Property property = this.propertyService.convertFormToProperty(propertyFormDTO);
         BigDecimal price = this.propertyService.getTotalPriceProperty(property);
         return new ResponseEntity<>(
@@ -41,14 +42,14 @@ public class PropertyController {
     }
 
     @PostMapping("/largestroom")
-    public ResponseEntity<?> getLargestRoom(@RequestBody PropertyFormDTO propertyFormDTO){
+    public ResponseEntity<?> getLargestRoom(@Valid @RequestBody PropertyFormDTO propertyFormDTO){
         Property property = this.propertyService.convertFormToProperty(propertyFormDTO);
         RoomSquareDTO largestRoomDTO = RoomSquareDTO.converte(this.propertyService.getLargestRoom(property));
         return new ResponseEntity<>(largestRoomDTO, HttpStatus.OK);
     }
 
     @PostMapping("squaremetersrooms")
-    public ResponseEntity<?> getSquareMetersAllRooms(@RequestBody PropertyFormDTO propertyFormDTO){
+    public ResponseEntity<?> getSquareMetersAllRooms(@Valid @RequestBody PropertyFormDTO propertyFormDTO){
         Property property = this.propertyService.convertFormToProperty(propertyFormDTO);
         return new ResponseEntity<>(this.propertyService.getSquareAllRooms(property), HttpStatus.OK);
     }

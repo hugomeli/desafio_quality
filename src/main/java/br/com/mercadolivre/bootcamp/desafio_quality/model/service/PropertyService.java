@@ -51,6 +51,9 @@ public class PropertyService {
     }
 
     public Property convertFormToProperty(PropertyFormDTO propertyFormDTO){
+        if (this.districtRepository.findByName(propertyFormDTO.getProp_district()) == null){
+            throw new IllegalArgumentException("Bairro inexistente");
+        }
         return new Property(
                 propertyFormDTO.getProp_name(),
                 new District(

@@ -1,14 +1,27 @@
 package br.com.mercadolivre.bootcamp.desafio_quality.model.forms;
 
 import br.com.mercadolivre.bootcamp.desafio_quality.model.entities.Room;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 
+import javax.validation.constraints.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class RoomFormDTO {
 
+    @NotBlank(message = "O campo não pode estar vazio.")
+    @Pattern(regexp = "^[A-Z][A-Za-z0-9_ ]*$", message = "O nome do cômodo deve começar com uma letra maiúscula.")
+    @Size(max = 30, message = "O comprimento do cômodo não pode exceder 30 caracteres.")
     private String room_name;
+
+    @NotBlank(message = "A largura do cômodo não pode estar vazia.")
+    @Max(value = 25, message = "A largura máxima permitida por cômodo é de 25 metros.")
+    @Min(value = 1, message = "A largura mínima é 1 metro.")
     private double room_width;
+
+    @NotBlank(message = "O comprimento do cômodo não pode estar vazio.")
+    @Max(value = 33, message = "O comprimento máximo permitido por cômodo é de 33 metros.")
+    @Min(value = 1, message = "O comprimento mínimo é 1 metro.")
     private double room_length;
 
     public RoomFormDTO() {
