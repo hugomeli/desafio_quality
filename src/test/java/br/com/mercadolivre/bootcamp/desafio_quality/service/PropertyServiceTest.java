@@ -32,14 +32,17 @@ public class PropertyServiceTest {
 
     @Test
     void deveRetornarAAreaDeUmaPropriedadeComDiversosComodosComAtributosValidos(){
-        List<Room> rooms = createRooms();
-        Property property = new Property(
-                "Casa Verde Com Jardim",
-                new District("Liberdade", new BigDecimal("6.0")),
-                rooms
-                );
+        Property property = createProperty();
         double expectedResult = 81.0;
         double result = propertyService.getTotalAreaProperty(property);
+        Assertions.assertEquals(expectedResult, result);
+    }
+
+    @Test
+    void deveRetornarOValorDeUmaPropriedadeComTodosAtributosValidos(){
+        Property property = createProperty();
+        BigDecimal expectedResult = new BigDecimal("486.00");
+        BigDecimal result = propertyService.getTotalPriceProperty(property);
         Assertions.assertEquals(expectedResult, result);
     }
 
@@ -50,5 +53,13 @@ public class PropertyServiceTest {
                 new Room("Cozinha", 5, 5),
                 new Room("Banheiro", 3, 2)
         ));
+    }
+
+    private Property createProperty(){
+        return new Property(
+                "Casa Verde Com Jardim",
+                new District("Liberdade", new BigDecimal("6.0")),
+                createRooms()
+        );
     }
 }
