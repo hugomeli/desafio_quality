@@ -4,15 +4,25 @@ import br.com.mercadolivre.bootcamp.desafio_quality.model.entities.District;
 import br.com.mercadolivre.bootcamp.desafio_quality.model.entities.Property;
 import br.com.mercadolivre.bootcamp.desafio_quality.model.entities.Room;
 import br.com.mercadolivre.bootcamp.desafio_quality.model.forms.PropertyFormDTO;
+import br.com.mercadolivre.bootcamp.desafio_quality.model.forms.RoomFormDTO;
+import br.com.mercadolivre.bootcamp.desafio_quality.model.repository.DistrictRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.Comparator;
 
 
 @Service
 public class PropertyService {
+
+    private final DistrictRepository districtRepository;
+
+    @Autowired
+    public PropertyService(DistrictRepository districtRepository) {
+        this.districtRepository = districtRepository;
+    }
+
 
     public double getTotalAreaProperty(Property property){
         // Para cada cômodo, vamos calcular a sua área, depois somar e assim teremos a área da propriedade
@@ -35,5 +45,16 @@ public class PropertyService {
         return property.getRooms()
                 .stream()
                 .max(Comparator.comparing(this::getTotalAreaRoom)).orElse(null);
+    }
+
+    public Property converteFormParaProperty(PropertyFormDTO propertyFormDTO){
+        return new Property(
+                propertyFormDTO.getProp_name(),
+                new District(
+                        propertyFormDTO.getProp_district(),
+                        this.districtRepository.findByName(propertyFormDTO.getProp_district()).getValueM2()),
+                        RoomFormDTO.converteRooms(propertyFormDTO.getRooms()
+                        )
+        );
     }
 }

@@ -22,8 +22,8 @@ public class PropertyServiceTest {
 
     @BeforeEach
     public void init(){
-        this.propertyService = new PropertyService();
         this.districtRepository = new DistrictRepository();
+        this.propertyService = new PropertyService(districtRepository);
     }
 
     @Test
