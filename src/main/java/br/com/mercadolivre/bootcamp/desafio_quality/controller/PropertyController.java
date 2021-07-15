@@ -1,5 +1,6 @@
 package br.com.mercadolivre.bootcamp.desafio_quality.controller;
 
+import br.com.mercadolivre.bootcamp.desafio_quality.model.DTO.LargestRoomDTO;
 import br.com.mercadolivre.bootcamp.desafio_quality.model.entities.Property;
 import br.com.mercadolivre.bootcamp.desafio_quality.model.forms.PropertyFormDTO;
 import br.com.mercadolivre.bootcamp.desafio_quality.model.service.PropertyService;
@@ -32,5 +33,12 @@ public class PropertyController {
     public ResponseEntity<?> calcPropertyTotalPrice(@RequestBody PropertyFormDTO propertyFormDTO){
         Property property = this.propertyService.converteFormParaProperty(propertyFormDTO);
         return new ResponseEntity<>(this.propertyService.getTotalPriceProperty(property), HttpStatus.OK);
+    }
+
+    @PostMapping("/largestroom")
+    public ResponseEntity<?> getLargestRoom(@RequestBody PropertyFormDTO propertyFormDTO){
+        Property property = this.propertyService.converteFormParaProperty(propertyFormDTO);
+        LargestRoomDTO largestRoomDTO = LargestRoomDTO.converte(this.propertyService.getLargestRoom(property));
+        return new ResponseEntity<>(largestRoomDTO, HttpStatus.OK);
     }
 }
