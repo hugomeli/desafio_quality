@@ -1,5 +1,6 @@
 package br.com.mercadolivre.bootcamp.desafio_quality.model.service;
 
+import br.com.mercadolivre.bootcamp.desafio_quality.model.DTO.RoomSquareDTO;
 import br.com.mercadolivre.bootcamp.desafio_quality.model.entities.District;
 import br.com.mercadolivre.bootcamp.desafio_quality.model.entities.Property;
 import br.com.mercadolivre.bootcamp.desafio_quality.model.entities.Room;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Comparator;
+import java.util.List;
 
 
 @Service
@@ -48,7 +50,7 @@ public class PropertyService {
                 .max(Comparator.comparing(this::getTotalAreaRoom)).orElse(null);
     }
 
-    public Property converteFormParaProperty(PropertyFormDTO propertyFormDTO){
+    public Property convertFormToProperty(PropertyFormDTO propertyFormDTO){
         return new Property(
                 propertyFormDTO.getProp_name(),
                 new District(
@@ -57,5 +59,9 @@ public class PropertyService {
                         RoomFormDTO.converteRooms(propertyFormDTO.getRooms()
                         )
         );
+    }
+
+    public List<RoomSquareDTO> getSquareAllRooms(Property property){
+        return RoomSquareDTO.converte(property.getRooms());
     }
 }

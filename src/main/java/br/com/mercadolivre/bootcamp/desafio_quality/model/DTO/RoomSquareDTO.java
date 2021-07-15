@@ -2,28 +2,37 @@ package br.com.mercadolivre.bootcamp.desafio_quality.model.DTO;
 
 import br.com.mercadolivre.bootcamp.desafio_quality.model.entities.Room;
 
-public class LargestRoomDTO {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class RoomSquareDTO {
     private String name;
     private double width;
     private double length;
     private double area;
 
-    public LargestRoomDTO() {
+    public RoomSquareDTO() {
     }
 
-    public LargestRoomDTO(String name, double width, double length) {
+    public RoomSquareDTO(String name, double width, double length) {
         this.name = name;
         this.width = width;
         this.length = length;
         this.area = width * length;
     }
 
-    public static LargestRoomDTO converte(Room room){
-        return new LargestRoomDTO(
+    public static RoomSquareDTO converte(Room room){
+        return new RoomSquareDTO(
                 room.getName(),
                 room.getWidth(),
                 room.getLength()
         );
+    }
+
+    public static List<RoomSquareDTO> converte(List<Room> rooms){
+        return rooms.stream().map(RoomSquareDTO::converte).collect(Collectors.toList());
     }
 
     public String getName() {
@@ -54,4 +63,7 @@ public class LargestRoomDTO {
         return area;
     }
 
+    public void setArea(double area) {
+        this.area = area;
+    }
 }

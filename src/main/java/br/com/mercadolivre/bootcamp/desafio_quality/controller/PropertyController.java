@@ -1,6 +1,6 @@
 package br.com.mercadolivre.bootcamp.desafio_quality.controller;
 
-import br.com.mercadolivre.bootcamp.desafio_quality.model.DTO.LargestRoomDTO;
+import br.com.mercadolivre.bootcamp.desafio_quality.model.DTO.RoomSquareDTO;
 import br.com.mercadolivre.bootcamp.desafio_quality.model.entities.Property;
 import br.com.mercadolivre.bootcamp.desafio_quality.model.forms.PropertyFormDTO;
 import br.com.mercadolivre.bootcamp.desafio_quality.model.service.PropertyService;
@@ -25,20 +25,26 @@ public class PropertyController {
 
     @PostMapping("/squaremeters")
     public ResponseEntity<?> calcTotalSquareMeters(@RequestBody PropertyFormDTO propertyFormDTO){
-        Property property = this.propertyService.converteFormParaProperty(propertyFormDTO);
+        Property property = this.propertyService.convertFormToProperty(propertyFormDTO);
         return new ResponseEntity<>(this.propertyService.getTotalAreaProperty(property), HttpStatus.OK);
     }
 
     @PostMapping("/price")
     public ResponseEntity<?> calcPropertyTotalPrice(@RequestBody PropertyFormDTO propertyFormDTO){
-        Property property = this.propertyService.converteFormParaProperty(propertyFormDTO);
+        Property property = this.propertyService.convertFormToProperty(propertyFormDTO);
         return new ResponseEntity<>(this.propertyService.getTotalPriceProperty(property), HttpStatus.OK);
     }
 
     @PostMapping("/largestroom")
     public ResponseEntity<?> getLargestRoom(@RequestBody PropertyFormDTO propertyFormDTO){
-        Property property = this.propertyService.converteFormParaProperty(propertyFormDTO);
-        LargestRoomDTO largestRoomDTO = LargestRoomDTO.converte(this.propertyService.getLargestRoom(property));
+        Property property = this.propertyService.convertFormToProperty(propertyFormDTO);
+        RoomSquareDTO largestRoomDTO = RoomSquareDTO.converte(this.propertyService.getLargestRoom(property));
         return new ResponseEntity<>(largestRoomDTO, HttpStatus.OK);
+    }
+
+    @PostMapping("squaremetersrooms")
+    public ResponseEntity<?> getSquareMetersAllRooms(@RequestBody PropertyFormDTO propertyFormDTO){
+        Property property = this.propertyService.convertFormToProperty(propertyFormDTO);
+        return new ResponseEntity<>(this.propertyService.getSquareAllRooms(property), HttpStatus.OK);
     }
 }
