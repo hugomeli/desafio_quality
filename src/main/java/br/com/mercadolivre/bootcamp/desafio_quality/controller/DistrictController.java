@@ -26,9 +26,11 @@ public class DistrictController {
         this.districtService.create(district);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-//
-//    @PostMapping("/update")
-//    public ResponseEntity<?> updateDistrict(@RequestBody District district){
-//        this.districtService.update(district)
-//    }
+
+    @PostMapping("/update")
+    public ResponseEntity<?> updateDistrict(@RequestBody DistrictFormDTO districtFormDTO){
+        District district = DistrictFormDTO.converte(districtFormDTO);
+        this.districtService.update(district);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

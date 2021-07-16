@@ -33,4 +33,14 @@ public class DistrictRepository {
     public void save(District district){
         this.districtList.add(district);
     }
+
+    public List<District> getDistrictList() {
+        return districtList;
+    }
+
+    public void update(District district) {
+        District districtFound = findByName(district.getName());
+        districtFound.setName(district.getName());
+        districtFound.setValueM2(district.getValueM2());
+    }
 }

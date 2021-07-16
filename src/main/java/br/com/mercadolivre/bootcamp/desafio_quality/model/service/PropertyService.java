@@ -7,6 +7,7 @@ import br.com.mercadolivre.bootcamp.desafio_quality.model.entities.Room;
 import br.com.mercadolivre.bootcamp.desafio_quality.model.forms.PropertyFormDTO;
 import br.com.mercadolivre.bootcamp.desafio_quality.model.forms.RoomFormDTO;
 import br.com.mercadolivre.bootcamp.desafio_quality.model.repository.DistrictRepository;
+import br.com.mercadolivre.bootcamp.desafio_quality.validations.exceptions.DistrictNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,7 +53,7 @@ public class PropertyService {
 
     public Property convertFormToProperty(PropertyFormDTO propertyFormDTO){
         if (this.districtRepository.findByName(propertyFormDTO.getProp_district()) == null){
-            throw new IllegalArgumentException("Bairro inexistente");
+            throw new DistrictNotFoundException("Bairro " + propertyFormDTO.getProp_district() + " inexistente");
         }
         return new Property(
                 propertyFormDTO.getProp_name(),
