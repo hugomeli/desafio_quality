@@ -23,4 +23,4 @@ Swagger
 
 Requisitos Técnicos Funcionais:
 
-[Link](documents/Requisitos técnicos funcionais.pdf)
+[Requisitos](documents/requisitos_tecnicos.pdf)
