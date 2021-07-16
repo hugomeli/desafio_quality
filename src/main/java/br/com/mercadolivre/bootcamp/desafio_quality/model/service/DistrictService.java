@@ -1,5 +1,6 @@
 package br.com.mercadolivre.bootcamp.desafio_quality.model.service;
 
+import br.com.mercadolivre.bootcamp.desafio_quality.model.DTO.DistrictDTO;
 import br.com.mercadolivre.bootcamp.desafio_quality.model.entities.District;
 import br.com.mercadolivre.bootcamp.desafio_quality.model.repository.DistrictRepository;
 import br.com.mercadolivre.bootcamp.desafio_quality.validations.exceptions.DistrictAlreadySavedException;
@@ -7,6 +8,8 @@ import br.com.mercadolivre.bootcamp.desafio_quality.validations.exceptions.Distr
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class DistrictService {
@@ -46,5 +49,10 @@ public class DistrictService {
             throw new DistrictNotFoundException("Bairro " + districtName + " inexistente");
         }
         return districtFounded;
+    }
+
+    public List<DistrictDTO> readAll() {
+        List<District> districts = this.districtRepository.readAll();
+        return DistrictDTO.converte(districts);
     }
 }

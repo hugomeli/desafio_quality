@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/district")
@@ -47,5 +48,11 @@ public class DistrictController {
     public ResponseEntity<DistrictDTO> readDistrict(@PathVariable String districtname){
         District district = this.districtService.read(districtname);
         return new ResponseEntity<>(DistrictDTO.converte(district), HttpStatus.OK);
+    }
+
+    @GetMapping("/readall")
+    public ResponseEntity<List<DistrictDTO>> readDistricts(){
+        List<DistrictDTO> districtsDTO = this.districtService.readAll();
+        return new ResponseEntity<>(districtsDTO, HttpStatus.OK);
     }
 }

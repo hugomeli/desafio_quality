@@ -3,6 +3,10 @@ package br.com.mercadolivre.bootcamp.desafio_quality.model.DTO;
 import br.com.mercadolivre.bootcamp.desafio_quality.model.entities.District;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class DistrictDTO {
     private String district_name;
@@ -21,6 +25,10 @@ public class DistrictDTO {
                 district.getName(),
                 district.getValueM2()
         );
+    }
+
+    public static List<DistrictDTO> converte(List<District> districtList){
+        return districtList.stream().map(DistrictDTO::converte).collect(Collectors.toList());
     }
 
     public String getDistrict_name() {

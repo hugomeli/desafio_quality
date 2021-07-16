@@ -47,4 +47,8 @@ public class DistrictRepository {
     public void deleteByName(String districtName){
         this.districtList.remove(findByName(districtName));
     }
+
+    public List<District> readAll() {
+        return this.districtList;
+    }
 }
