@@ -1,5 +1,6 @@
 package br.com.mercadolivre.bootcamp.desafio_quality.validations.handlers;
 
+import br.com.mercadolivre.bootcamp.desafio_quality.validations.exceptions.DistrictAlreadySavedException;
 import br.com.mercadolivre.bootcamp.desafio_quality.validations.exceptions.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -36,5 +37,11 @@ public class ApiExceptionControllerAdvice {
         });
 
         return errors;
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(DistrictAlreadySavedException.class)
+    public String handleDistrictAlreadySaved(DistrictAlreadySavedException exception){
+        return exception.getMessage();
     }
 }

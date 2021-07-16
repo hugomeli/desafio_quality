@@ -29,4 +29,8 @@ public class DistrictRepository {
                 .findFirst()
                 .orElse(null);
     }
+
+    public void save(District district){
+        this.districtList.add(district);
+    }
 }
