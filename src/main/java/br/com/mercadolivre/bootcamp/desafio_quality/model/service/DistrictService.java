@@ -32,4 +32,11 @@ public class DistrictService {
         }
         this.districtRepository.update(district);
     }
+
+    public void delete(String districtName){
+        if (this.districtRepository.findByName(districtName) == null){
+            throw new DistrictNotFoundException("Bairro " + districtName + " inexistente");
+        }
+        this.districtRepository.deleteByName(districtName);
+    }
 }

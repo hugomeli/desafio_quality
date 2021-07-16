@@ -43,4 +43,8 @@ public class DistrictRepository {
         districtFound.setName(district.getName());
         districtFound.setValueM2(district.getValueM2());
     }
+
+    public void deleteByName(String districtName){
+        this.districtList.remove(findByName(districtName));
+    }
 }

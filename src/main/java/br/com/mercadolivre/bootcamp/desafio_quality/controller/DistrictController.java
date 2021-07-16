@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/district")
 public class DistrictController {
@@ -21,16 +23,22 @@ public class DistrictController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> createDistrict(@RequestBody DistrictFormDTO districtFormDTO){
+    public ResponseEntity<?> createDistrict(@Valid @RequestBody DistrictFormDTO districtFormDTO){
         District district = DistrictFormDTO.converte(districtFormDTO);
         this.districtService.create(district);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/update")
-    public ResponseEntity<?> updateDistrict(@RequestBody DistrictFormDTO districtFormDTO){
+    public ResponseEntity<?> updateDistrict(@Valid @RequestBody DistrictFormDTO districtFormDTO){
         District district = DistrictFormDTO.converte(districtFormDTO);
         this.districtService.update(district);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/delete/{districtname}")
+    public ResponseEntity<?> deleteDistrict(@PathVariable String districtname){
+        this.districtService.delete(districtname);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

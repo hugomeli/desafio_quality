@@ -2,9 +2,7 @@ package br.com.mercadolivre.bootcamp.desafio_quality.model.forms;
 
 import br.com.mercadolivre.bootcamp.desafio_quality.model.entities.District;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
 public class DistrictFormDTO {
@@ -13,9 +11,9 @@ public class DistrictFormDTO {
     @Size(max = 45, message = "O comprimento do bairro não pode exceder 45 caracteres.")
     private String prop_name;
 
-    @NotBlank(message = "O valor do metro quadrado no bairro não pode estar vazio.")
+    @NotNull(message = "O valor do metro quadrado no bairro não pode estar vazio.")
     @Min(value = 1, message = "O valor não pode ser inferior a 1.")
-    @Size(max = 13, message = "O comprimento do campo não pode exceder 13 dígitos.")
+    @Max(value = 999999999, message = "O comprimento do campo não pode exceder 13 dígitos.")
     private BigDecimal value_district_m2;
 
     public DistrictFormDTO() {
