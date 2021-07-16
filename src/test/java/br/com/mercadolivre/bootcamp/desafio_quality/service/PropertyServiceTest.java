@@ -27,7 +27,7 @@ public class PropertyServiceTest {
     }
 
     @Test
-    void deveriaRetornarAAreaDeUmComodo_LarguraVezesComprimento(){
+    void shouldReturnARoomArea_WidthMultiplyByLength(){
         Room room = new Room("Quarto", 5, 6);
         double expectedResult = 30.0;
         double result = propertyService.getTotalAreaRoom(room);

@@ -21,6 +21,7 @@ public class DistrictService {
         this.districtRepository = districtRepository;
     }
 
+
     public void create(District district) {
         if (this.districtRepository.findByName(district.getName()) != null){
             throw new DistrictAlreadySavedException(
