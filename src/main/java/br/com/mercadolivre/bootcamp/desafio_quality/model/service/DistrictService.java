@@ -39,4 +39,12 @@ public class DistrictService {
         }
         this.districtRepository.deleteByName(districtName);
     }
+
+    public District read(String districtName) {
+        District districtFounded = this.districtRepository.findByName(districtName);
+        if (districtFounded == null){
+            throw new DistrictNotFoundException("Bairro " + districtName + " inexistente");
+        }
+        return districtFounded;
+    }
 }

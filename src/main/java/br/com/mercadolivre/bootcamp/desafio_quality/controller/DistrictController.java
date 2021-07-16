@@ -1,6 +1,7 @@
 package br.com.mercadolivre.bootcamp.desafio_quality.controller;
 
 
+import br.com.mercadolivre.bootcamp.desafio_quality.model.DTO.DistrictDTO;
 import br.com.mercadolivre.bootcamp.desafio_quality.model.entities.District;
 import br.com.mercadolivre.bootcamp.desafio_quality.model.forms.DistrictFormDTO;
 import br.com.mercadolivre.bootcamp.desafio_quality.model.service.DistrictService;
@@ -40,5 +41,11 @@ public class DistrictController {
     public ResponseEntity<?> deleteDistrict(@PathVariable String districtname){
         this.districtService.delete(districtname);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/read/{districtname}")
+    public ResponseEntity<DistrictDTO> readDistrict(@PathVariable String districtname){
+        District district = this.districtService.read(districtname);
+        return new ResponseEntity<>(DistrictDTO.converte(district), HttpStatus.OK);
     }
 }
