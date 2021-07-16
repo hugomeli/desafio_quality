@@ -14,6 +14,7 @@ public class DistrictFormDTO {
     @NotNull(message = "O valor do metro quadrado no bairro não pode estar vazio.")
     @Min(value = 1, message = "O valor não pode ser inferior a 1.")
     @Max(value = 999999999, message = "O valor máximo do metro quadrado é de 999999999.")
+    @Digits(integer = 13, fraction = 2, message = "O valor não pode possuir mais do que 13 dígitos.")
     private BigDecimal value_district_m2;
 
     public DistrictFormDTO() {
